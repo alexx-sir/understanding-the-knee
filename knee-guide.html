@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knee Health Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --card: #FFFFFF;
+    --ink: #1C1C1A;
+    --muted: #8A8880;
+    --border: #E8E4DE;
+    --red: #B83232;
+    --red-light: #FDF0F0;
+    --red-border: #EECECE;
+    --blue: #1E5799;
+    --blue-light: #EEF3FB;
+    --blue-border: #C4D4EE;
+    --green: #2A7A48;
+    --green-light: #EDF5F1;
+    --green-border: #B8D9C6;
+    --amber: #9A6E10;
+    --amber-light: #FDF6E3;
+    --amber-border: #E8D5A0;
+    --purple: #6B3FA0;
+    --purple-light: #F3EEFB;
+    --purple-border: #D4C0EE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: #1C1C1A;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(184,50,50,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 75% 40%, rgba(30,87,153,0.14) 0%, transparent 55%);
+  }
+  .cover-inner { position: relative; z-index: 1; }
+  .cover-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+  .cover-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 9vw, 78px);
+    color: #fff;
+    line-height: 1.0;
+    margin-bottom: 16px;
+  }
+  .cover-title em {
+    font-style: italic;
+    color: rgba(255,255,255,0.55);
+  }
+  .cover-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    max-width: 420px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── NAV DOTS ── */
+  .toc {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .toc-link {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .toc-link:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 24px 100px;
+  }
+
+  /* ── ANATOMY SECTION ── */
+  .anatomy-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .anatomy-diagram {
+    background: #F4F1EC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    min-height: 280px;
+  }
+  .anatomy-text {
+    padding: 32px;
+  }
+  .anatomy-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .anatomy-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  .anatomy-body {
+    font-size: 14px;
+    color: #5A5652;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .anatomy-parts {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .anatomy-part {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #5A5652;
+  }
+  .anatomy-part-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-break {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 52px 0 28px;
+  }
+  .section-break-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-break-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── CONDITION BANNER ── */
+  .condition-banner {
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    border: 1px solid var(--red-border);
+    background: var(--red-light);
+  }
+  .condition-banner-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+  .condition-banner-body {
+    font-size: 14px;
+    color: #6A3030;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .symptom-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .symptom-pill {
+    font-size: 12px;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid var(--red-border);
+    color: var(--red);
+    padding: 5px 12px;
+    border-radius: 99px;
+  }
+
+  /* ── EXERCISE CARD ── */
+  .exercise-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .exercise-card-inner {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+  }
+  .exercise-illustration {
+    background: #F4F1EC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    min-height: 220px;
+    border-right: 1px solid var(--border);
+  }
+  .exercise-content {
+    padding: 28px 32px;
+  }
+  .exercise-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .ex-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 99px;
+    letter-spacing: 0.05em;
+  }
+  .ex-badge.knee { background: var(--red-light); color: var(--red); border: 1px solid var(--red-border); }
+  .ex-badge.glute { background: var(--purple-light); color: var(--purple); border: 1px solid var(--purple-border); }
+  .ex-badge.quad { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-border); }
+  .ex-badge.hip { background: var(--amber-light); color: var(--amber); border: 1px solid var(--amber-border); }
+  .ex-badge.calf { background: var(--green-light); color: var(--green); border: 1px solid var(--green-border); }
+  .exercise-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .exercise-sets {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .exercise-desc {
+    font-size: 14px;
+    color: #5A5652;
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .how-to-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .how-to-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .how-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: #5A5652;
+    line-height: 1.6;
+  }
+  .how-step-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-box {
+    background: var(--amber-light);
+    border: 1px solid var(--amber-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: #6A4A10;
+    line-height: 1.6;
+  }
+  .tip-box strong {
+    color: var(--amber);
+    font-weight: 600;
+  }
+
+  /* ── SVG FIGURE STYLES ── */
+  .figure-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    fill: #8A8880;
+    font-weight: 500;
+  }
+  .figure-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    fill: #1C1C1A;
+    font-weight: 600;
+  }
+
+  /* ── SCHEDULE TABLE ── */
+  .schedule-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .schedule-head {
+    background: var(--ink);
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .schedule-head-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: #fff;
+  }
+  .schedule-head-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .schedule-row:last-child { border-bottom: none; }
+  .schedule-day {
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .schedule-exercises {
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .sched-ex {
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+  .sched-rest {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── PROGRESS TRACKER ── */
+  .tracker {
+    background: var(--green-light);
+    border: 1px solid var(--green-border);
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+  .tracker-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .tracker-sub {
+    font-size: 14px;
+    color: #2A5A3A;
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+  .tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .tracker-week {
+    background: #fff;
+    border: 1px solid var(--green-border);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .tracker-week-num {
+    font-size: 28px;
+    font-family: 'DM Serif Display', serif;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .tracker-week-label {
+    font-size: 11px;
+    color: #4A8A5A;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .tracker-week-focus {
+    font-size: 12px;
+    color: #2A5A3A;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .tracker-week-box {
+    margin-top: 12px;
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+  }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--green-border);
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  /* ── WARNING ── */
+  .warning-card {
+    background: var(--red-light);
+    border: 1px solid var(--red-border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 16px;
+  }
+  .warning-icon { font-size: 24px; flex-shrink: 0; }
+  .warning-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .warning-body {
+    font-size: 13px;
+    color: #6A3030;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  @media (max-width: 640px) {
+    .anatomy-card { grid-template-columns: 1fr; }
+    .exercise-card-inner { grid-template-columns: 1fr; }
+    .exercise-illustration { min-height: 200px; border-right: none; border-bottom: 1px solid var(--border); }
+    .tracker-grid { grid-template-columns: 1fr 1fr; }
+    .toc { padding: 12px 16px; }
+    .main { padding: 40px 16px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-tag">Personal Health Guide</div>
+    <h1 class="cover-title">Knee Health<br><em>&amp; Strength</em></h1>
+    <p class="cover-sub">A complete guide to understanding, treating, and preventing runner's knee — with exercises to build a bulletproof knee for life.</p>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc">
+  <a class="toc-link" href="#anatomy">Anatomy</a>
+  <a class="toc-link" href="#runners-knee">Runner's Knee</a>
+  <a class="toc-link" href="#exercises">Exercises</a>
+  <a class="toc-link" href="#strength">Strengthening</a>
+  <a class="toc-link" href="#schedule">Weekly Plan</a>
+  <a class="toc-link" href="#progress">Progress</a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ANATOMY -->
+  <div id="anatomy">
+    <div class="section-break">
+      <div class="section-break-line"></div>
+      <div class="section-break-label">Understanding Your Knee</div>
+      <div class="section-break-line"></div>
+    </div>
+
+    <div class="anatomy-card">
+      <div class="anatomy-diagram">
+        <svg viewBox="0 0 200 280" width="180" height="252" xmlns="http://www.w3.org/2000/svg">
+          <!-- Femur bone -->
+          <rect x="80" y="10" width="40" height="90" rx="8" fill="#E8E0D4" stroke="#C8BFB0" stroke-width="1.5"/>
+          <ellipse cx="100" cy="100" rx="44" ry="22" fill="#E8E0D4" stroke="#C8BFB0" stroke-width="1.5"/>
+          <!-- Kneecap -->
+          <ellipse cx="100" cy="108" rx="18" ry="22" fill="#D4C8B8" stroke="#B8A898" stroke-width="1.5"/>
+          <!-- Tibia -->
+          <ellipse cx="100" cy="134" rx="36" ry="16" fill="#E8E0D4" stroke="#C8BFB0" stroke-width="1.5"/>
+          <rect x="76" y="138" width="48" height="100" rx="6" fill="#E8E0D4" stroke="#C8BFB0" stroke-width="1.5"/>
+          <!-- Cartilage -->
+          <ellipse cx="84" cy="122" rx="12" ry="6" fill="#B8D4C0" stroke="#88B898" stroke-width="1"/>
+          <ellipse cx="116" cy="122" rx="12" ry="6" fill="#B8D4C0" stroke="#88B898" stroke-width="1"/>
+          <!-- Ligaments -->
+          <line x1="88" y1="100" x2="88" y2="134" stroke="#C8A878" stroke-width="2" stroke-dasharray="3,2"/>
+          <line x1="112" y1="100" x2="112" y2="134" stroke="#C8A878" stroke-width="2" stroke-dasharray="3,2"/>
+          <!-- Patellar tendon -->
+          <line x1="100" y1="128" x2="100" y2="148" stroke="#A89878" stroke-width="3"/>
+          <!-- Labels -->
+          <text x="148" y="55" class="figure-label">Femur</text>
+          <line x1="120" y1="52" x2="145" y2="52" stroke="#C8BFB0" stroke-width="0.8"/>
+          <text x="148" y="112" class="figure-label">Patella</text>
+          <line x1="118" y1="108" x2="145" y2="108" stroke="#C8BFB0" stroke-width="0.8"/>
+          <text x="148" y="128" class="figure-label">Cartilage</text>
+          <line x1="128" y1="122" x2="145" y2="124" stroke="#C8BFB0" stroke-width="0.8"/>
+          <text x="148" y="148" class="figure-label">Patellar</text>
+          <text x="148" y="158" class="figure-label">tendon</text>
+          <line x1="103" y1="142" x2="145" y2="150" stroke="#C8BFB0" stroke-width="0.8"/>
+          <text x="148" y="182" class="figure-label">Tibia</text>
+          <line x1="124" y1="180" x2="145" y2="178" stroke="#C8BFB0" stroke-width="0.8"/>
+          <!-- Pain zone highlight for runner's knee -->
+          <ellipse cx="100" cy="108" rx="22" ry="26" fill="none" stroke="#B83232" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
+          <text x="30" y="90" class="figure-label" fill="#B83232">Pain zone</text>
+          <line x1="58" y1="90" x2="78" y2="100" stroke="#B83232" stroke-width="0.8" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="anatomy-text">
+        <div class="anatomy-label">Knee Anatomy</div>
+        <div class="anatomy-title">What's actually inside your knee</div>
+        <div class="anatomy-body">Your knee is the largest joint in your body and takes roughly 3–4x your bodyweight with every running step. Understanding what's in there helps you understand why certain exercises work.</div>
+        <div class="anatomy-parts">
+          <div class="anatomy-part">
+            <div class="anatomy-part-dot" style="background:#D4C8B8;"></div>
+            <div><strong>Patella (kneecap)</strong> — floats in front of the joint, held in a groove by the surrounding muscles. When those muscles are weak or imbalanced, it tracks incorrectly — causing pain.</div>
+          </div>
+          <div class="anatomy-part">
+            <div class="anatomy-part-dot" style="background:#B8D4C0;"></div>
+            <div><strong>Cartilage (meniscus)</strong> — two C-shaped pads that cushion the joint. They absorb impact and need strong surrounding muscles to avoid taking too much load.</div>
+          </div>
+          <div class="anatomy-part">
+            <div class="anatomy-part-dot" style="background:#C8A878;"></div>
+            <div><strong>Ligaments</strong> — tough bands holding the bones together. The ACL, PCL, MCL, and LCL provide stability in all directions.</div>
+          </div>
+          <div class="anatomy-part">
+            <div class="anatomy-part-dot" style="background:#A89878;"></div>
+            <div><strong>Patellar tendon</strong> — connects the kneecap to the tibia. Carries massive force during running and jumping. Very susceptible to overuse.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUNNER'S KNEE -->
+  <div id="runners-knee">
+    <div class="section-break">
+      <div class="section-break-line"></div>
+      <div class="section-break-label">The Condition</div>
+      <div class="section-break-line"></div>
+    </div>
+
+    <div class="condition-banner">
+      <div class="condition-banner-title">Runner's Knee (Patellofemoral Pain Syndrome)</div>
+      <div class="condition-banner-body">
+        Runner's knee is pain around or behind the kneecap, caused by the patella not tracking correctly in its groove. Instead of gliding smoothly, it grinds against the bone underneath. The root cause is almost never the knee itself — it's weak glutes and hips forcing the kneecap off its normal path.<br><br>
+        The good news: it responds extremely well to the right exercises. Most people see significant improvement within 4–6 weeks of consistent strengthening.
+      </div>
+      <div class="symptom-row">
+        <span class="symptom-pill">Pain around the kneecap</span>
+        <span class="symptom-pill">Worse going downstairs</span>
+        <span class="symptom-pill">Stiff after sitting</span>
+        <span class="symptom-pill">Aching after runs</span>
+        <span class="symptom-pill">Clicking sensation</span>
+      </div>
+    </div>
+
+    <div class="warning-card">
+      <div class="warning-icon">⚠️</div>
+      <div>
+        <div class="warning-title">When to see a doctor instead</div>
+        <div class="warning-body">If you have sudden severe pain, significant swelling, inability to bear weight, a popping sensation during injury, or pain that hasn't improved after 6 weeks of these exercises — see a physiotherapist. This guide is for chronic dull pain, not acute injuries.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXERCISES FOR RUNNER'S KNEE -->
+  <div id="exercises">
+    <div class="section-break">
+      <div class="section-break-line"></div>
+      <div class="section-break-label">Runner's Knee Exercises</div>
+      <div class="section-break-line"></div>
+    </div>
+
+    <!-- CLAMSHELLS -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 180" width="190" height="171" xmlns="http://www.w3.org/2000/svg">
+            <!-- Floor -->
+            <line x1="10" y1="155" x2="190" y2="155" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Body lying sideways -->
+            <!-- Torso -->
+            <ellipse cx="100" cy="85" rx="50" ry="22" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5" transform="rotate(-5,100,85)"/>
+            <!-- Head -->
+            <circle cx="52" cy="72" r="16" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Bottom leg bent -->
+            <path d="M 140 90 Q 165 110 170 138" stroke="#C8A888" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <!-- Top leg - closed position (faded) -->
+            <path d="M 138 80 Q 163 100 168 128" stroke="#E8C8A8" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <!-- Top leg - open position (solid) -->
+            <path d="M 138 80 Q 155 68 162 80" stroke="#C8A888" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <!-- Arrow showing movement -->
+            <path d="M 158 95 Q 162 78 160 72" stroke="#B83232" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+            <defs>
+              <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#B83232"/>
+              </marker>
+            </defs>
+            <!-- Feet together indicator -->
+            <circle cx="170" cy="138" r="5" fill="#B8D4C0" stroke="#88B898" stroke-width="1"/>
+            <circle cx="168" cy="130" r="5" fill="#B8D4C0" stroke="#88B898" stroke-width="1" opacity="0.5"/>
+            <!-- Labels -->
+            <text x="100" y="172" text-anchor="middle" class="figure-title">Clamshell</text>
+            <text x="152" y="58" class="figure-label" fill="#B83232">Lift</text>
+            <text x="100" y="170" class="figure-label" text-anchor="middle"> </text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge glute">Glutes</span>
+            <span class="ex-badge hip">Hip abductors</span>
+          </div>
+          <div class="exercise-name">Clamshells</div>
+          <div class="exercise-sets">3 sets · 15 reps each side · Rest 45 sec</div>
+          <div class="exercise-desc">The most important runner's knee exercise. Directly targets the gluteus medius — the muscle responsible for keeping your kneecap tracking correctly. Weak glute meds are the single biggest cause of patellofemoral pain.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Lie on your side with your hips stacked and knees bent to about 45 degrees. Keep your feet together throughout the whole movement.</div>
+            <div class="how-step"><div class="how-step-num">2</div>Keeping your feet touching, rotate your top knee upward toward the ceiling as far as you can without your hips rolling back.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Hold at the top for 2 seconds, then lower slowly. The lowering is as important as the lifting.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Complete all reps on one side before switching.</div>
+          </div>
+          <div class="tip-box"><strong>Make it harder:</strong> Place a resistance band just above your knees. Make it easier: reduce range of motion until you build strength.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP DOWNS -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 200" width="190" height="190" xmlns="http://www.w3.org/2000/svg">
+            <!-- Step platform -->
+            <rect x="40" y="130" width="120" height="20" rx="4" fill="#D4C8B8" stroke="#B8A898" stroke-width="1.5"/>
+            <rect x="60" y="150" width="80" height="30" rx="2" fill="#C8BFB0" stroke="#B8A898" stroke-width="1"/>
+            <!-- Body standing on step - bent knee position -->
+            <!-- Standing leg (on step) -->
+            <line x1="105" y1="80" x2="105" y2="130" stroke="#C8A888" stroke-width="8" stroke-linecap="round"/>
+            <!-- Lowering leg (off step, angled) -->
+            <path d="M 95 90 L 85 130 L 78 150" stroke="#B83232" stroke-width="7" fill="none" stroke-linecap="round"/>
+            <!-- Torso -->
+            <rect x="88" y="45" width="24" height="40" rx="8" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Head -->
+            <circle cx="100" cy="32" r="14" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Arms out for balance -->
+            <line x1="88" y1="60" x2="60" y2="72" stroke="#C8A888" stroke-width="5" stroke-linecap="round"/>
+            <line x1="112" y1="60" x2="140" y2="72" stroke="#C8A888" stroke-width="5" stroke-linecap="round"/>
+            <!-- Down arrow for lowering leg -->
+            <path d="M 72 140 L 72 160" stroke="#B83232" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+            <defs>
+              <marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#B83232"/>
+              </marker>
+            </defs>
+            <text x="100" y="192" text-anchor="middle" class="figure-title">Step-down</text>
+            <text x="55" y="168" class="figure-label" fill="#B83232">Lower</text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge quad">Quads</span>
+            <span class="ex-badge glute">Glutes</span>
+          </div>
+          <div class="exercise-name">Step-downs</div>
+          <div class="exercise-sets">3 sets · 12 reps each leg · Rest 60 sec</div>
+          <div class="exercise-desc">Directly retrains how your kneecap tracks during the exact motion that causes pain — controlled downward movement. This is one of the most functional exercises for runner's knee because it mimics running's loading pattern.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Stand on a step or a sturdy box with one foot. The other foot hangs off the edge.</div>
+            <div class="how-step"><div class="how-step-num">2</div>Slowly bend the standing knee, lowering the hanging foot toward the floor. Count 3–4 seconds going down. Don't let the knee cave inward.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Tap the floor lightly (or stop just before) then return to standing using only the standing leg.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Watch your knee in a mirror — it should stay directly over your second toe, never diving inward.</div>
+          </div>
+          <div class="tip-box"><strong>Key form cue:</strong> The moment your knee collapses inward is your glute med failing. Stop and reset. Quality over quantity every time.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIGURE FOUR STRETCH -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 200" width="190" height="190" xmlns="http://www.w3.org/2000/svg">
+            <!-- Floor -->
+            <line x1="10" y1="175" x2="190" y2="175" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Body lying on back -->
+            <ellipse cx="100" cy="110" rx="30" ry="55" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5" transform="rotate(5,100,110)"/>
+            <!-- Head -->
+            <circle cx="100" cy="52" r="15" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Bottom leg bent up -->
+            <path d="M 92 162 Q 75 140 80 110" stroke="#C8A888" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <!-- Top leg crossed (figure 4) -->
+            <path d="M 108 155 Q 130 130 118 110" stroke="#B83232" stroke-width="8" fill="none" stroke-linecap="round"/>
+            <path d="M 108 155 Q 90 162 80 162" stroke="#C8A888" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <!-- Hands pulling -->
+            <path d="M 80 110 Q 70 95 80 88" stroke="#C8A888" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M 118 110 Q 128 95 118 88" stroke="#C8A888" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <!-- Arrows pulling legs toward chest -->
+            <path d="M 78 90 L 85 80" stroke="#B83232" stroke-width="1.5" fill="none" marker-end="url(#arr3)"/>
+            <defs>
+              <marker id="arr3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#B83232"/>
+              </marker>
+            </defs>
+            <text x="100" y="192" text-anchor="middle" class="figure-title">Figure-four stretch</text>
+            <text x="140" y="122" class="figure-label" fill="#B83232">Crossed leg</text>
+            <text x="35" y="82" class="figure-label" fill="#B83232">Pull toward</text>
+            <text x="35" y="90" class="figure-label" fill="#B83232">chest</text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge glute">Piriformis</span>
+            <span class="ex-badge hip">Outer hip</span>
+          </div>
+          <div class="exercise-name">Figure-four stretch</div>
+          <div class="exercise-sets">Hold 45 seconds · 3 rounds each side · Daily</div>
+          <div class="exercise-desc">Releases the piriformis and outer hip — tight muscles that rotate the femur inward and put abnormal stress on the kneecap. This stretch is often the fastest way to get immediate pain relief from runner's knee.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Lie on your back with both knees bent and feet flat on the floor.</div>
+            <div class="how-step"><div class="how-step-num">2</div>Cross your right ankle over your left knee, letting the right knee fall open to the side.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Reach through the gap and pull both legs toward your chest until you feel a deep stretch in the right outer glute and hip.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Hold, breathe deeply, and let gravity pull the knee further open with each exhale.</div>
+          </div>
+          <div class="tip-box"><strong>Where you should feel it:</strong> Deep in the outer glute of the crossed leg — not in the knee itself. If you feel it in the knee, check your foot position.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WALL SIT -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 210" width="190" height="200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Wall -->
+            <rect x="10" y="0" width="20" height="200" fill="#E8E4DE" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Floor -->
+            <line x1="10" y1="185" x2="190" y2="185" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Body in wall sit -->
+            <!-- Back against wall -->
+            <rect x="30" y="55" width="22" height="70" rx="8" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Thighs (horizontal) -->
+            <path d="M 30 125 L 100 130" stroke="#C8A888" stroke-width="10" stroke-linecap="round"/>
+            <path d="M 52 125 L 100 130" stroke="#E8D8C8" stroke-width="7" stroke-linecap="round"/>
+            <!-- Shins (vertical) -->
+            <line x1="100" y1="130" x2="100" y2="185" stroke="#C8A888" stroke-width="10" stroke-linecap="round"/>
+            <!-- Head -->
+            <circle cx="41" cy="42" r="14" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- 90 degree angle indicator -->
+            <path d="M 100 148 L 88 148 L 88 130" stroke="#B83232" stroke-width="1" fill="none"/>
+            <text x="72" y="147" class="figure-label" fill="#B83232">90°</text>
+            <!-- Arms at sides -->
+            <line x1="30" y1="75" x2="15" y2="95" stroke="#C8A888" stroke-width="5" stroke-linecap="round"/>
+            <line x1="52" y1="75" x2="60" y2="95" stroke="#C8A888" stroke-width="5" stroke-linecap="round"/>
+            <text x="100" y="200" text-anchor="middle" class="figure-title">Wall sit</text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge quad">Quads</span>
+            <span class="ex-badge glute">Glutes</span>
+          </div>
+          <div class="exercise-name">Wall Sit</div>
+          <div class="exercise-sets">3 sets · 30–45 seconds · Rest 60 sec</div>
+          <div class="exercise-desc">Builds quad endurance at the exact angle where runner's knee tends to flare up. Unlike squats, the wall removes balance from the equation so you can focus entirely on muscle activation and holding the position correctly.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Stand with your back flat against a wall. Walk your feet out until your thighs are parallel to the floor — or as close as you can manage.</div>
+            <div class="how-step"><div class="how-step-num">2</div>Your knees should be at about 90 degrees and directly above your ankles — not in front of them.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Press your lower back into the wall. Don't let it arch away.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Hold for the target time. When it gets easy, hold longer before adding a second set.</div>
+          </div>
+          <div class="tip-box"><strong>Pain warning:</strong> If you feel sharp pain in the kneecap during this, raise your body slightly up the wall so the knee angle is less severe. Build the range gradually.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERAL STRENGTHENING -->
+  <div id="strength">
+    <div class="section-break">
+      <div class="section-break-line"></div>
+      <div class="section-break-label">General Knee Strengthening</div>
+      <div class="section-break-line"></div>
+    </div>
+
+    <!-- GLUTE BRIDGE -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 180" width="190" height="171" xmlns="http://www.w3.org/2000/svg">
+            <!-- Floor -->
+            <line x1="10" y1="155" x2="190" y2="155" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Body in bridge -->
+            <!-- Feet flat -->
+            <rect x="135" y="140" width="30" height="15" rx="4" fill="#C8A888" stroke="#A88868" stroke-width="1"/>
+            <rect x="95" y="140" width="30" height="15" rx="4" fill="#C8A888" stroke="#A88868" stroke-width="1"/>
+            <!-- Shins -->
+            <line x1="150" y1="140" x2="155" y2="105" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <line x1="110" y1="140" x2="115" y2="105" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <!-- Thighs + hips raised -->
+            <path d="M 155 105 Q 135 75 115 105" stroke="#C8A888" stroke-width="10" fill="none" stroke-linecap="round"/>
+            <!-- Torso on floor -->
+            <rect x="50" y="105" width="65" height="20" rx="8" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Head on floor -->
+            <circle cx="38" cy="115" r="13" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Straight line indicator -->
+            <line x1="115" y1="90" x2="62" y2="105" stroke="#2A7A48" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="60" y="82" class="figure-label" fill="#2A7A48">Straight line</text>
+            <!-- Arrow up -->
+            <path d="M 135 80 L 135 65" stroke="#B83232" stroke-width="1.5" fill="none" marker-end="url(#arr4)"/>
+            <defs>
+              <marker id="arr4" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#B83232"/>
+              </marker>
+            </defs>
+            <text x="100" y="172" text-anchor="middle" class="figure-title">Glute bridge</text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge glute">Glutes</span>
+            <span class="ex-badge hip">Hamstrings</span>
+          </div>
+          <div class="exercise-name">Glute Bridge</div>
+          <div class="exercise-sets">3 sets · 20 reps · Hold 2 sec at top · Rest 45 sec</div>
+          <div class="exercise-desc">The foundation of knee health. Strong glutes stabilise the femur (thigh bone) and prevent the inward collapse that causes kneecap grinding. This is the exercise that should never leave your routine — even after your knee feels completely better.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Lie on your back with knees bent, feet flat on the floor about hip-width apart. Arms flat at your sides.</div>
+            <div class="how-step"><div class="how-step-num">2</div>Push through your heels and lift your hips until your body forms a straight line from shoulders to knees.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Squeeze your glutes hard at the top. Hold for 2 seconds. You should feel it entirely in your glutes, not your lower back.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Lower slowly and repeat without letting your hips fully drop to the floor between reps.</div>
+          </div>
+          <div class="tip-box"><strong>Progress to:</strong> Single-leg glute bridge — same movement but one foot lifted. Massively harder and much more specific to running mechanics.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ECCENTRIC SQUAT -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 210" width="190" height="200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Floor -->
+            <line x1="10" y1="190" x2="190" y2="190" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Standing figure (ghost - starting position) -->
+            <circle cx="100" cy="35" r="13" fill="#E8D8C8" stroke="#C8A888" stroke-width="1" opacity="0.3"/>
+            <rect x="88" y="48" width="24" height="35" rx="6" fill="#E8D8C8" stroke="#C8A888" stroke-width="1" opacity="0.3"/>
+            <line x1="100" y1="83" x2="90" y2="130" stroke="#C8A888" stroke-width="7" opacity="0.3" stroke-linecap="round"/>
+            <line x1="100" y1="83" x2="110" y2="130" stroke="#C8A888" stroke-width="7" opacity="0.3" stroke-linecap="round"/>
+            <!-- Squat figure (solid - bottom position) -->
+            <circle cx="100" cy="55" r="14" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <rect x="88" y="68" width="24" height="30" rx="6" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Thighs angled out -->
+            <line x1="93" y1="98" x2="65" y2="148" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <line x1="107" y1="98" x2="135" y2="148" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <!-- Shins vertical -->
+            <line x1="65" y1="148" x2="65" y2="190" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <line x1="135" y1="148" x2="135" y2="190" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <!-- Down arrow slow -->
+            <path d="M 100 25 L 100 42" stroke="#B83232" stroke-width="1.5" fill="none" marker-end="url(#arr5)"/>
+            <defs>
+              <marker id="arr5" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#B83232"/>
+              </marker>
+            </defs>
+            <text x="108" y="22" class="figure-label" fill="#B83232">Slow (4 sec)</text>
+            <!-- Knee alignment markers -->
+            <line x1="65" y1="148" x2="65" y2="195" stroke="#2A7A48" stroke-width="0.8" stroke-dasharray="3,2"/>
+            <line x1="135" y1="148" x2="135" y2="195" stroke="#2A7A48" stroke-width="0.8" stroke-dasharray="3,2"/>
+            <text x="100" y="204" text-anchor="middle" class="figure-title">Slow squat</text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge quad">Quads</span>
+            <span class="ex-badge glute">Glutes</span>
+            <span class="ex-badge hip">Hip stabilisers</span>
+          </div>
+          <div class="exercise-name">Slow Eccentric Squat</div>
+          <div class="exercise-sets">3 sets · 10 reps · 4 seconds down · Rest 60 sec</div>
+          <div class="exercise-desc">The eccentric (lowering) phase of a squat is where the knee takes the most stress — and also where it gets the most benefit from training. Going down slowly builds incredible quad and glute strength while teaching the knee to absorb load correctly.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Stand with feet shoulder-width apart, toes turned out slightly (about 15–30 degrees).</div>
+            <div class="how-step"><div class="how-step-num">2</div>Take 4 full seconds to lower into the squat. Count out loud if it helps — most people rush this part.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Lower until your thighs are parallel to the floor, or as far as is comfortable without knee pain.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Stand back up at normal speed. The slow part is the going down, not the coming up.</div>
+          </div>
+          <div class="tip-box"><strong>Knee tracking:</strong> Your knees must travel in the same direction as your toes. If they cave inward, widen your stance or add a resistance band above the knees for feedback.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVERSE LUNGE -->
+    <div class="exercise-card">
+      <div class="exercise-card-inner">
+        <div class="exercise-illustration">
+          <svg viewBox="0 0 200 210" width="190" height="200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Floor -->
+            <line x1="10" y1="190" x2="190" y2="190" stroke="#C8BFB0" stroke-width="1"/>
+            <!-- Back knee near floor -->
+            <circle cx="145" cy="175" r="6" fill="#C8A888" stroke="#A88868" stroke-width="1"/>
+            <!-- Back leg -->
+            <line x1="145" y1="175" x2="120" y2="120" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <!-- Front leg -->
+            <line x1="90" y1="190" x2="90" y2="120" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <!-- Front foot -->
+            <rect x="75" y="183" width="28" height="12" rx="4" fill="#C8A888" stroke="#A88868" stroke-width="1"/>
+            <!-- Thigh horizontal (front) -->
+            <line x1="90" y1="120" x2="120" y2="120" stroke="#C8A888" stroke-width="9" stroke-linecap="round"/>
+            <!-- Torso -->
+            <rect x="105" y="70" width="22" height="52" rx="8" fill="#E8D8C8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- Head -->
+            <circle cx="116" cy="57" r="13" fill="#E8C8A8" stroke="#C8A888" stroke-width="1.5"/>
+            <!-- 90 angle at front knee -->
+            <path d="M 90 140 L 102 140 L 102 120" stroke="#B83232" stroke-width="1" fill="none"/>
+            <text x="104" y="138" class="figure-label" fill="#B83232">90°</text>
+            <!-- Arrow showing step back -->
+            <path d="M 140 100 L 158 100" stroke="#2A7A48" stroke-width="1.5" fill="none" marker-end="url(#arr6)"/>
+            <defs>
+              <marker id="arr6" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#2A7A48"/>
+              </marker>
+            </defs>
+            <text x="138" y="96" class="figure-label" fill="#2A7A48">Step back</text>
+            <text x="100" y="204" text-anchor="middle" class="figure-title">Reverse lunge</text>
+          </svg>
+        </div>
+        <div class="exercise-content">
+          <div class="exercise-meta">
+            <span class="ex-badge quad">Quads</span>
+            <span class="ex-badge glute">Glutes</span>
+          </div>
+          <div class="exercise-name">Reverse Lunge</div>
+          <div class="exercise-sets">3 sets · 10 reps each leg · Rest 60 sec</div>
+          <div class="exercise-desc">Much easier on the knee than a forward lunge because the shin stays more vertical, reducing shear force on the kneecap. Builds the exact muscles needed for running while being safe to do even during a runner's knee flare-up.</div>
+          <div class="how-to-label">How to do it</div>
+          <div class="how-to-steps">
+            <div class="how-step"><div class="how-step-num">1</div>Stand tall with feet together. Step one foot backward, landing on the ball of that foot.</div>
+            <div class="how-step"><div class="how-step-num">2</div>Lower your back knee toward the floor — aim to hover about an inch above it without touching.</div>
+            <div class="how-step"><div class="how-step-num">3</div>Your front shin should stay roughly vertical. Your front knee tracks directly over your second toe.</div>
+            <div class="how-step"><div class="how-step-num">4</div>Push through the front heel to stand back up. Complete all reps on one leg before switching.</div>
+          </div>
+          <div class="tip-box"><strong>Use a wall:</strong> Place one hand on a wall for balance until you're confident with the movement. Perfect form matters more than reps.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY SCHEDULE -->
+  <div id="schedule">
+    <div class="section-break">
+      <div class="section-break-line"></div>
+      <div class="section-break-label">Weekly Plan</div>
+      <div class="section-break-line"></div>
+    </div>
+
+    <div class="schedule-card">
+      <div class="schedule-head">
+        <div class="schedule-head-title">Your weekly knee routine</div>
+        <div class="schedule-head-sub">Takes 20–25 min per session</div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Monday</div>
+        <div class="schedule-exercises">
+          <span class="sched-ex">Clamshells</span>
+          <span class="sched-ex">Glute bridge</span>
+          <span class="sched-ex">Figure-four stretch</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Tuesday</div>
+        <div class="schedule-exercises"><span class="sched-rest">Rest or light walk</span></div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Wednesday</div>
+        <div class="schedule-exercises">
+          <span class="sched-ex">Slow squat</span>
+          <span class="sched-ex">Step-downs</span>
+          <span class="sched-ex">Wall sit</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Thursday</div>
+        <div class="schedule-exercises">
+          <span class="sched-ex">Clamshells</span>
+          <span class="sched-ex">Glute bridge</span>
+          <span class="sched-ex">Figure-four stretch</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Friday</div>
+        <div class="schedule-exercises"><span class="sched-rest">Rest or light walk</span></div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Saturday</div>
+        <div class="schedule-exercises">
+          <span class="sched-ex">Reverse lunge</span>
+          <span class="sched-ex">Step-downs</span>
+          <span class="sched-ex">Wall sit</span>
+        </div>
+      </div>
+      <div class="schedule-row">
+        <div class="schedule-day">Sunday</div>
+        <div class="schedule-exercises"><span class="sched-rest">Full rest</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS TRACKER -->
+  <div id="progress">
+    <div class="section-break">
+      <div class="section-break-line"></div>
+      <div class="section-break-label">What to expect</div>
+      <div class="section-break-line"></div>
+    </div>
+
+    <div class="tracker">
+      <div class="tracker-title">Your 4-week progress path</div>
+      <div class="tracker-sub">Print this page and check off your sessions as you go. Most people feel significant improvement by week 3.</div>
+      <div class="tracker-grid">
+        <div class="tracker-week">
+          <div class="tracker-week-num">W1</div>
+          <div class="tracker-week-label">Foundation</div>
+          <div class="tracker-week-focus">Learn the movements. Focus on form not reps. Pain during exercises is okay — sharp pain means stop.</div>
+          <div class="tracker-week-box">
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+          </div>
+        </div>
+        <div class="tracker-week">
+          <div class="tracker-week-num">W2</div>
+          <div class="tracker-week-label">Building</div>
+          <div class="tracker-week-focus">Add reps. Start to feel the glutes engaging. Pain during daily activities should start to reduce.</div>
+          <div class="tracker-week-box">
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+          </div>
+        </div>
+        <div class="tracker-week">
+          <div class="tracker-week-num">W3</div>
+          <div class="tracker-week-label">Adapting</div>
+          <div class="tracker-week-focus">Morning stiffness improves. Stairs feel easier. Try the single-leg glute bridge progression.</div>
+          <div class="tracker-week-box">
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+          </div>
+        </div>
+        <div class="tracker-week">
+          <div class="tracker-week-num">W4</div>
+          <div class="tracker-week-label">Stronger</div>
+          <div class="tracker-week-focus">Most pain should be significantly reduced. Don't stop here — keep going to make these gains permanent.</div>
+          <div class="tracker-week-box">
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+            <div class="check-box"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<div style="background:#1C1C1A; padding: 40px 32px; text-align:center;">
+  <div style="font-family:'DM Serif Display',serif; font-size:22px; color:#fff; margin-bottom:8px;">Knee Health Guide</div>
+  <div style="font-size:12px; color:rgba(255,255,255,0.3);">Personal reference · Not medical advice · See a physio if pain persists beyond 6 weeks</div>
+</div>
+
+</body>
+</html>
